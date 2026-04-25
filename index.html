@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Launchboard | Job Application Tracker</title>
+    <meta
+      name="description"
+      content="A polished job application tracker built with vanilla JavaScript, localStorage, and a testable logic layer."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Portfolio Project</p>
+          <h1>Launchboard</h1>
+          <p class="hero-text">
+            Track applications, spot momentum, and keep your job search organized
+            in one fast local app.
+          </p>
+        </div>
+        <div class="hero-panel">
+          <p class="hero-panel-label">Why it works on GitHub</p>
+          <ul class="hero-points">
+            <li>Responsive UI without frameworks</li>
+            <li>Modular JavaScript with tests</li>
+            <li>Practical product thinking</li>
+          </ul>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel panel-form">
+          <div class="section-heading">
+            <h2>Add application</h2>
+            <p>Capture each opportunity in under a minute.</p>
+          </div>
+
+          <form id="application-form" class="application-form">
+            <label>
+              Company
+              <input id="company" name="company" type="text" maxlength="60" required />
+            </label>
+
+            <label>
+              Role
+              <input id="role" name="role" type="text" maxlength="80" required />
+            </label>
+
+            <div class="form-row">
+              <label>
+                Status
+                <select id="status" name="status">
+                  <option value="Applied">Applied</option>
+                  <option value="Interviewing">Interviewing</option>
+                  <option value="Offer">Offer</option>
+                  <option value="Rejected">Rejected</option>
+                </select>
+              </label>
+
+              <label>
+                Applied on
+                <input id="appliedOn" name="appliedOn" type="date" required />
+              </label>
+            </div>
+
+            <div class="form-row">
+              <label>
+                Location
+                <input id="location" name="location" type="text" maxlength="40" />
+              </label>
+
+              <label>
+                Salary
+                <input id="salary" name="salary" type="text" maxlength="30" placeholder="$70k-$85k" />
+              </label>
+            </div>
+
+            <label>
+              Job link
+              <input id="link" name="link" type="url" placeholder="https://company.com/jobs/..." />
+            </label>
+
+            <label>
+              Notes
+              <textarea id="notes" name="notes" rows="4" maxlength="240"></textarea>
+            </label>
+
+            <div class="form-actions">
+              <button type="submit" class="button button-primary">Save application</button>
+              <button type="reset" class="button button-secondary">Clear</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="content-column">
+          <section class="stats-grid" id="stats-grid" aria-label="Application stats"></section>
+
+          <section class="panel">
+            <div class="toolbar">
+              <div class="section-heading">
+                <h2>Pipeline</h2>
+                <p>Search and filter your job search at a glance.</p>
+              </div>
+
+              <div class="controls">
+                <input
+                  id="search"
+                  class="search"
+                  type="search"
+                  placeholder="Search company, role, or note"
+                  aria-label="Search applications"
+                />
+
+                <select id="status-filter" aria-label="Filter by status">
+                  <option value="All">All statuses</option>
+                  <option value="Applied">Applied</option>
+                  <option value="Interviewing">Interviewing</option>
+                  <option value="Offer">Offer</option>
+                  <option value="Rejected">Rejected</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="application-list" class="application-list" aria-live="polite"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <template id="application-card-template">
+      <article class="application-card">
+        <div class="card-header">
+          <div>
+            <p class="company"></p>
+            <h3 class="role"></h3>
+          </div>
+          <span class="status-chip"></span>
+        </div>
+        <div class="card-meta"></div>
+        <p class="notes"></p>
+        <div class="card-actions">
+          <a class="link-button" target="_blank" rel="noreferrer">Open listing</a>
+          <button type="button" class="button button-inline delete-button">Delete</button>
+        </div>
+      </article>
+    </template>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
